@@ -1,0 +1,94 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html" 
+                xmlns:f="http://java.sun.com/jsf/core" 
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+
+    <h:form id="datewisestd_frm">
+
+        <p:growl id="datewisestdgrl" autoUpdate="false" sticky="false" />
+
+        <center>
+
+            <p:panelGrid styleClass="panelGrid" style="border: none">
+
+                <p:row>
+
+                    <p:column>   
+
+                        <p:panelGrid styleClass="panelGrid">
+
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <p:outputLabel value="From Date"/>
+                                </p:column><p:column>
+                                    <p:calendar value="#{stdAtdnDateWiseRptController.stdAtdnDateWiseRpt.fromdate}" styleClass="inputCal" required="true"/>
+                                </p:column>   
+                            </p:row> 
+
+                            <p:row>
+                                <p:column styleClass="label">
+                                    <p:outputLabel value="To Date"/>
+                                </p:column><p:column>
+                                    <p:calendar value="#{stdAtdnDateWiseRptController.stdAtdnDateWiseRpt.todate}" styleClass="inputCal" required="true"/>
+                                </p:column>   
+                            </p:row> 
+
+                        </p:panelGrid> 
+
+                        <p:commandButton value="See" update="attendencedatewisetbl"  action="#{stdAtdnDateWiseRptController.showAttendence()}" style="margin-top: 8px;margin-left: 100px"/>
+
+
+                    </p:column> 
+
+                </p:row>
+
+            </p:panelGrid>
+
+
+            <p:dataTable id="attendencedatewisetbl" value="#{stdAtdnDateWiseRptController.stdAttendeceList}" var="attendencereport" style="width: 700px; margin-top: 20px">
+
+                <p:column headerText="Date">
+                    #{attendencereport.date}    
+                </p:column>
+
+                <p:column headerText="Total Student">
+                    #{attendencereport.totalstudent}    
+                </p:column>
+
+                <p:column headerText="Total Present">
+                    #{attendencereport.totalpresent}    
+                </p:column> 
+
+                <p:column headerText="%">
+                    #{attendencereport.presentpercentage}    
+                </p:column> 
+
+                <p:column headerText="Total Absent">
+                    #{attendencereport.totalabsent}    
+                </p:column> 
+
+                <p:column headerText="%">
+                    #{attendencereport.absentpercentage}    
+                </p:column> 
+
+
+            </p:dataTable>
+
+
+             <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+                    <p:printer target="attendencedatewisetbl" />
+           </h:commandButton>
+        
+        </center>
+
+    </h:form>
+
+
+
+</ui:composition>
+
+
