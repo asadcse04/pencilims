@@ -127,7 +127,7 @@ public class At_A_Glance implements Serializable
         
     }
 
-    public At_A_Glance(String studentID, String studentName, int studentRoll, String gender, String fatherName, String contactNo, int acyr, String className, String deptName, String shiftName, String sectionName) {
+    public At_A_Glance(String studentID, String studentName, int studentRoll, String gender, String fatherName, String contactNo, int acyr, String className, String deptName, String shiftName, String sectionName, String imgPath) {
         this.studentID = studentID;
         this.studentName = studentName;
         this.studentRoll = studentRoll;
@@ -139,6 +139,7 @@ public class At_A_Glance implements Serializable
         this.deptName = deptName;
         this.shiftName = shiftName;
         this.sectionName = sectionName;
+        this.imgPath= imgPath;
     }
     
 

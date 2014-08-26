@@ -92,7 +92,7 @@
                             <h:outputLabel value="*" styleClass="red"/>
                         </p:column>
                         <p:column>
-                            <p:inputText value="#{assignUserTypeController.assignUserType.userName}" styleClass="inputText" style="color: red;"/>
+                            <p:inputText value="#{assignUserTypeController.assignUserType.teacherID}" styleClass="inputText" readonly="true" style="color: red;"/>
                         </p:column>
                     </p:row>
                     
@@ -108,24 +108,17 @@
 
                     <p:row>
                         <p:column styleClass="label">
-                            <h:outputLabel value="User Type"/>
+                            <h:outputLabel value="User Roles"/>
                             <h:outputLabel value="*" styleClass="red"/>
                         </p:column>
                         <p:column>
                             <p:selectOneMenu value="#{assignUserTypeController.assignUserType.userType}" styleClass="inputCombo" style="width: 165px;" required="true" requiredMessage="Please Select A Category.">
                                 <f:selectItem itemLabel="Select Category" itemValue=""/>
-                                <f:selectItem itemLabel="Admin" itemValue="Admin"/>
-                                <f:selectItem itemLabel="Teacher" itemValue="Teacher"/>
+                                <f:selectItem itemLabel="Admin" itemValue="admin"/>
+                                <f:selectItem itemLabel="Co-Admin" itemValue="co_admin"/>
+                                <f:selectItem itemLabel="Operator" itemValue="operator"/>
+                                <f:selectItem itemLabel="Teacher" itemValue="teacher"/>
                             </p:selectOneMenu>
-                        </p:column>
-                    </p:row>
-                    
-                    <p:row>
-                        <p:column styleClass="label" >
-                            <h:outputLabel value="Note"/>
-                        </p:column>
-                        <p:column>
-                            <p:inputText  value="#{assignUserTypeController.assignUserType.note}" styleClass="inputText" />
                         </p:column>
                     </p:row>
 

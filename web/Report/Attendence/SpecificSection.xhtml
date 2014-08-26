@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml" 
+                xmlns:h="http://java.sun.com/jsf/html"  
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <p:layout styleClass="tabHeight">
+
+        <p:layoutUnit position="west" size="25%">
+
+            <h:form id="specifics_section_wise_list_frm">
+
+                <center>
+
+                    <p:panelGrid columns="2">
+
+
+                        <h:outputText value="Academic Year "/>
+
+                        <p:selectOneMenu value="#{attendanceReportController.examResultOpt.acyr}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{attendanceReportController.acyrList}" />
+
+                            <p:ajax event="change" update="ex_classID" listener="#{attendanceReportController.scClassList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Class"/>
+
+                        <p:selectOneMenu id="ex_classID" value="#{attendanceReportController.examResultOpt.className}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{attendanceReportController.classList}" />
+
+                            <p:ajax event="change" update="ex_deptID" listener="#{attendanceReportController.departmentList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Department"/>
+
+                        <p:selectOneMenu id="ex_deptID" value="#{attendanceReportController.examResultOpt.deptName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{attendanceReportController.deptList}" />
+
+                            <p:ajax event="change" update="ex_shiftID" listener="#{attendanceReportController.shiftNameList}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Shift"/>
+
+                        <p:selectOneMenu id="ex_shiftID" value="#{attendanceReportController.examResultOpt.shiftName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{attendanceReportController.shiftList}" />
+
+                            <p:ajax event="change" update="ex_sectionID" listener="#{attendanceReportController.section_List}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Section"/>
+
+                        <p:selectOneMenu id="ex_sectionID" value="#{attendanceReportController.examResultOpt.sectionName}" effect="slide" >  
+
+                            <f:selectItem itemLabel="Select An Option" itemValue="" />  
+
+                            <f:selectItems value="#{attendanceReportController.sectionList}" />
+
+                            <p:ajax event="change" listener="#{attendanceReportController.Sc_Cnf_ID}"/>
+
+                        </p:selectOneMenu>
+
+
+                        <h:outputText value="Date"/>
+
+                        <p:calendar effect="explode" id="date" value="#{attendanceReportController.specificDate}" pattern="yyyy-MM-dd"/>
+
+                    </p:panelGrid>
+
+                    <p:commandButton id="specific_section_list_btn" value="Search" update="specifics_section_wise_list_frm,:specifics_section__tbl_frm" actionListener="#{attendanceReportController.getSpecificSectionAttendance}"  icon="ui-icon-search"  style="margin-top:7px;"/>
+
+                </center>
+
+            </h:form>
+
+        </p:layoutUnit>
+        
+        
+        <p:layoutUnit position="center">
+
+        <h:form id="specifics_section__tbl_frm">
+
+            <p:growl autoUpdate="true" showDetail="true"/> 
+
+            <p:dataTable value="#{attendanceReportController.specificDateSectionAtd_List}" var="specificAttendance" style="width:960px;">
+  
+
+                <p:column >
+
+                    <f:facet name="header">Student ID</f:facet>  
+
+                    <h:outputText value="#{specificAttendance.studentID}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Student Name</f:facet>  
+
+                    <h:outputText value="#{specificAttendance.studentName}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Student Roll</f:facet>  
+
+                    <h:outputText value="#{specificAttendance.studentRoll}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Status</f:facet>  
+
+                    <h:outputText style="color: #{(specificAttendance.status==0) ? 'green' : 'red'}" value="#{(specificAttendance.status==0) ? 'Present' : 'Absent'}"/>
+
+                </p:column>
+                
+                <p:column>
+
+                    <f:facet name="header">Note</f:facet>  
+
+                    <h:outputText value="#{specificAttendance.note}"/>
+
+                </p:column>
+
+            </p:dataTable> 
+
+
+        </h:form>
+
+            <h:commandButton value="Print" type="button" style="margin-top: 10px;"> 
+
+                    <p:printer target="specifics_section__tbl_frm" />
+
+           </h:commandButton>
+</p:layoutUnit>
+        
+</p:layout>
+
+</ui:composition>

@@ -12,9 +12,11 @@ import java.io.Serializable;
  */
 public class InstituteSetup  implements Serializable
 {
-    private int instituteID;
-
-    private String instituteName;
+    private String instituteID;
+    
+    private String  instituteName;
+    
+    private String instituteFullName;
     
     private String address;
     
@@ -30,23 +32,19 @@ public class InstituteSetup  implements Serializable
     
     private String code;
     
-    private String instituteType;
-    
-    private String educationArea;
-    
-    private String branchName;
-    
     private String slogan;
     
     private String note;
-    
-    private String footerDisplay;
-    
-    private String imgPath;
 
-    public InstituteSetup(int instituteID, String instituteName, String address, String estb, String contactNo, String email, String webSite, String einNo, String code, String instituteType, String educationArea, String branchName, String slogan, String note, String footerDisplay, String imgPath) {
+    private String imgPath;
+        
+    private String backgroundImgPath;
+  
+    
+    public InstituteSetup(String instituteID, String instituteFullName, String address, String estb, String contactNo, String email, String webSite, String einNo, String code, String slogan, String note, String imgPath, String backgroundImgPath) 
+    {
         this.instituteID = instituteID;
-        this.instituteName = instituteName;
+        this.instituteFullName = instituteFullName;
         this.address = address;
         this.estb = estb;
         this.contactNo = contactNo;
@@ -54,13 +52,10 @@ public class InstituteSetup  implements Serializable
         this.webSite = webSite;
         this.einNo = einNo;
         this.code = code;
-        this.instituteType = instituteType;
-        this.educationArea = educationArea;
-        this.branchName = branchName;
         this.slogan = slogan;
         this.note = note;
-        this.footerDisplay = footerDisplay;
         this.imgPath = imgPath;
+        this.backgroundImgPath = backgroundImgPath;
     }
 
     public InstituteSetup() 
@@ -68,14 +63,13 @@ public class InstituteSetup  implements Serializable
         
     }
 
-   public int getInstituteID() {
+    public String getInstituteID() {
         return instituteID;
     }
 
-    public void setInstituteID(int instituteID) {
+    public void setInstituteID(String instituteID) {
         this.instituteID = instituteID;
     }
-    
 
     public String getInstituteName() {
         return instituteName;
@@ -83,6 +77,14 @@ public class InstituteSetup  implements Serializable
 
     public void setInstituteName(String instituteName) {
         this.instituteName = instituteName;
+    }
+
+    public String getInstituteFullName() {
+        return instituteFullName;
+    }
+
+    public void setInstituteFullName(String instituteFullName) {
+        this.instituteFullName = instituteFullName;
     }
 
     public String getAddress() {
@@ -141,30 +143,7 @@ public class InstituteSetup  implements Serializable
         this.code = code;
     }
 
-    public String getInstituteType() {
-        return instituteType;
-    }
-
-    public void setInstituteType(String instituteType) {
-        this.instituteType = instituteType;
-    }
-
-    public String getEducationArea() {
-        return educationArea;
-    }
-
-    public void setEducationArea(String educationArea) {
-        this.educationArea = educationArea;
-    }
-
-    public String getBranchName() {
-        return branchName;
-    }
-
-    public void setBranchName(String branchName) {
-        this.branchName = branchName;
-    }
-
+   
     public String getSlogan() {
         return slogan;
     }
@@ -181,14 +160,7 @@ public class InstituteSetup  implements Serializable
         this.note = note;
     }
 
-    public String getFooterDisplay() {
-        return footerDisplay;
-    }
-
-    public void setFooterDisplay(String footerDisplay) {
-        this.footerDisplay = footerDisplay;
-    }
-
+ 
     public String getImgPath() {
         return imgPath;
     }
@@ -196,4 +168,14 @@ public class InstituteSetup  implements Serializable
     public void setImgPath(String imgPath) {
         this.imgPath = imgPath;
     }  
+
+    public String getBackgroundImgPath() {
+        return backgroundImgPath;
+    }
+
+    public void setBackgroundImgPath(String backgroundImgPath) {
+        this.backgroundImgPath = backgroundImgPath;
+    }
+    
+    
 }

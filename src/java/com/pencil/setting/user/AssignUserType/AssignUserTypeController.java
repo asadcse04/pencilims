@@ -28,7 +28,8 @@ public class AssignUserTypeController {
     AssignUserTypeService dao = new AssignUserTypeServiceImpl();
     
 /////////////////////////////////////////////////////////////
-    public void insertUserType() {
+    public void insertUserType()
+    {
         FacesContext context = FacesContext.getCurrentInstance();
 
         if (dao.addUserType(this.assignUserType)) {

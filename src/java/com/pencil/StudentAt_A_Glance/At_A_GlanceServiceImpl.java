@@ -36,7 +36,7 @@ public class At_A_GlanceServiceImpl implements At_A_GlanceService,Serializable
         try {
 
             String query = "SELECT sb.StudentID,sb.StudentName, sb.StudentRoll,sb.Gender,sg.FatherName,sg.ContactNo,acyr.AcYrID,"
-                    + " c.ClassName,d.DepartmentName,s.ShiftName,sctn.SectionName"
+                    + " c.ClassName,d.DepartmentName,s.ShiftName,sctn.SectionName,sb.ImgPath"
                     + " from student_basic_info sb,student_guardian_info sg,classconfig scCnf,"
                     + " student_identification si,academic_year acyr,"
                     + " department d,class c,shift s,section sctn"
@@ -54,8 +54,8 @@ public class At_A_GlanceServiceImpl implements At_A_GlanceService,Serializable
 
             while (rs.next()) {
 
-                stdInfolist.add(new At_A_Glance(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11)));
-                System.out.println("" + rs.getString(2));
+                stdInfolist.add(new At_A_Glance(rs.getString(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getString(8), rs.getString(9), rs.getString(10), rs.getString(11),rs.getString("ImgPath")));
+                System.out.println("SHOHUG  " + rs.getString("ImgPath"));
             }
 
             

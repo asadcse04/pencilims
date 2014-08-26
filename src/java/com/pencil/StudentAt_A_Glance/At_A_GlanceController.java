@@ -56,6 +56,8 @@ public class At_A_GlanceController implements Serializable
      this.studentSearch.setStudentRoll(0);
      
      this.studentSearch.setDeptName("");
+     
+     this.studentSearch.setImgPath("");
         
      }   
      else
@@ -78,7 +80,9 @@ public class At_A_GlanceController implements Serializable
      
      this.studentSearch.setStudentRoll(this.studentlist.get(0).getStudentRoll());
      
-     this.studentSearch.setDeptName(this.studentlist.get(0).getDeptName());  
+     this.studentSearch.setDeptName(this.studentlist.get(0).getDeptName()); 
+     
+     this.studentSearch.setImgPath(this.studentlist.get(0).getImgPath());
     
          
      }

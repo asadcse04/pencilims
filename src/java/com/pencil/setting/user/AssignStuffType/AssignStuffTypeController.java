@@ -28,10 +28,13 @@ public class AssignStuffTypeController {
     AssignStuffTypeService dao = new AssignStuffTypeServiceImpl();
     
 /////////////////////////////////////////////////////////////
-    public void insertStuffType() {
+    
+    public void insertStuffType() 
+    {
         FacesContext context = FacesContext.getCurrentInstance();
 
-        if (dao.addUserType(this.assignUserType)) {
+        if (dao.addUserType(this.assignUserType)) 
+        {
             this.userTypeList = dao.userList();
 
             this.assignUserType = null;
@@ -41,10 +44,12 @@ public class AssignStuffTypeController {
             context.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Failed to insert info!", ""));
         }
     }
+    
 /////////////////////////////////////////////////////////////////
     
 ////////////////////////////////////////////////////////////////////
-    public AssignStuffTypeController() {
+    public AssignStuffTypeController()
+    {
         this.userTypeList = dao.userList();
     }
 

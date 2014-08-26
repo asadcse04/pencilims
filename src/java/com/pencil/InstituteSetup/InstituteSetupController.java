@@ -12,6 +12,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import org.primefaces.model.UploadedFile;
 
 /**
@@ -24,31 +26,53 @@ public class InstituteSetupController implements Serializable
 {
     private InstituteSetup instituteSetup;
     
-    private UploadedFile photoFile;
+    private UploadedFile photoFileLogo;
+    
+    private UploadedFile photoFileBackGImg;
     
     private List<InstituteSetup> InstituteList;
+    
+    private List<String> invstituteNameData;
     
     InstituteSetupService InstituteDao = new InstituteSetupServiceImpl();
    
     ImgUpLoad imgservice=new ImgUpload_Impl();
     
+    
+    
     public InstituteSetupController()
     {
-         this.InstituteList = InstituteDao.instituteSetupList();
+        FacesContext context = FacesContext.getCurrentInstance();
+        
+        HttpServletRequest request = (HttpServletRequest) context.getExternalContext().getRequest();
+        
+        HttpSession s = request.getSession();
+        
+        System.out.println(s.getAttribute("user"));
+        
+       
+        this.InstituteList = InstituteDao.instituteSetupList();
+         
+        this.invstituteNameData = InstituteDao.instituteNameList();
+         
     }
     
     
   public void insertInstituteSetup()
     {
-        FacesContext context = FacesContext.getCurrentInstance();
+       FacesContext context = FacesContext.getCurrentInstance();
         
-       if(photoFile != null)
+       if(photoFileLogo != null)
         {
-            this.instituteSetup.setImgPath(instituteSetup.getInstituteID()+"_"+photoFile.getFileName());
+            this.instituteSetup.setImgPath(photoFileLogo.getFileName());
+            
+            this.instituteSetup.setBackgroundImgPath(photoFileBackGImg.getFileName());
             
             if(InstituteDao.saveInstitute(this.instituteSetup))
             {
-                imgservice.uploadImg("Header",instituteSetup.getInstituteID()+"_"+photoFile.getFileName(),photoFile);
+                imgservice.uploadImg("Header",photoFileLogo.getFileName(),photoFileLogo);
+                
+                imgservice.uploadImg("Header", photoFileBackGImg.getFileName(), photoFileBackGImg);
                 
                 context.addMessage(null, new FacesMessage("Successful","Insert institute setup.")); 
             }
@@ -67,7 +91,7 @@ public class InstituteSetupController implements Serializable
   
   public void editInstituteSetup()
     {
-     if(this.photoFile.getFileName().equals(""))
+     if(this.photoFileLogo.getFileName().equals(""))
         {
             if(InstituteDao.updateInstitute(instituteSetup))               
             {        
@@ -80,11 +104,11 @@ public class InstituteSetupController implements Serializable
         }
         else
         {
-            this.instituteSetup.setImgPath(instituteSetup.getInstituteID()+"_"+photoFile.getFileName());
+            this.instituteSetup.setImgPath(photoFileLogo.getFileName());
             
             if(InstituteDao.updateInstitute(instituteSetup)) 
             {        
-                imgservice.uploadImg("Header",instituteSetup.getInstituteID()+"_"+photoFile.getFileName(),photoFile);
+                imgservice.uploadImg("Header",photoFileLogo.getFileName(),photoFileLogo);
             
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Successfully update institute info."));
             }
@@ -109,13 +133,22 @@ public class InstituteSetupController implements Serializable
         this.instituteSetup = instituteSetup;
     }
 
-    public UploadedFile getPhotoFile() {
-        return photoFile;
+    public UploadedFile getPhotoFileLogo() {
+        return photoFileLogo;
     }
 
-    public void setPhotoFile(UploadedFile photoFile) {
-        this.photoFile = photoFile;
+    public void setPhotoFileLogo(UploadedFile photoFileLogo) {
+        this.photoFileLogo = photoFileLogo;
     }
+
+    public UploadedFile getPhotoFileBackGImg() {
+        return photoFileBackGImg;
+    }
+
+    public void setPhotoFileBackGImg(UploadedFile photoFileBackGImg) {
+        this.photoFileBackGImg = photoFileBackGImg;
+    }
+
 
     public List<InstituteSetup> getInstituteList() {
         return InstituteList;
@@ -131,6 +164,14 @@ public class InstituteSetupController implements Serializable
 
     public void setImgservice(ImgUpLoad imgservice) {
         this.imgservice = imgservice;
+    }
+
+    public List<String> getInvstituteNameData() {
+        return invstituteNameData;
+    }
+
+    public void setInvstituteNameData(List<String> invstituteNameData) {
+        this.invstituteNameData = invstituteNameData;
     }
 
 }

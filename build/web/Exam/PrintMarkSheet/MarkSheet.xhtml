@@ -235,7 +235,7 @@
                     </p:column> 
 
                     <p:column>
-                        <h:outputText value="#{mark_sheet_tbl.letterGrade}"/>
+                        <h:outputText style="color: #{(mark_sheet_tbl.letterGrade=='F') ? 'red':'black'};" value="#{mark_sheet_tbl.letterGrade}"/>
                     </p:column> 
 
                     <p:column>
@@ -256,7 +256,7 @@
                             <p:column>
                                 <h:outputText value="Grade"/>
                             </p:column><p:column>
-                                <p:outputLabel id="total_grade" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.finalGrade}"/>
+                                <p:outputLabel id="total_grade" style="font-weight: bold; color: #{(markSheetPrintController.markSheetPrint.finalGrade != 'F') ? 'black' : 'red'};" value="#{markSheetPrintController.markSheetPrint.finalGrade}"/>
                             </p:column>
                         </p:row>
 
@@ -290,7 +290,7 @@
                             <p:column>
                                 <h:outputText value="Status"/>
                             </p:column><p:column colspan="3">
-                                <p:outputLabel id="status" style="font-weight: bold;" value="#{markSheetPrintController.markSheetPrint.status}"/>
+                                <h:outputText id="status" style="font-weight: bold; color: #{(markSheetPrintController.markSheetPrint.status != 'Fail') ? 'green' : 'red'};"  value="#{markSheetPrintController.markSheetPrint.status}"/>
                             </p:column>
                         </p:row>
                         <p:row>

@@ -402,12 +402,12 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
 
                     if ((rs.next()) && (count <= smsBal))
                     {
-                        /*if (smsService.sendIndividual_Sms(rs.getString("sg.ContactNo"), "Dear parents,your child does not attend to the school today.Please take care.Student ID:-'" + studentid + "' ") == 200)
+                        if (smsService.sendIndividual_Sms(rs.getString("sg.ContactNo"), "Dear parents,your child does not attend to the Institute today.Please take care.Student ID:-'" + studentid + "' ") == 200)
                          {
                          count++;
-                         }*/
+                         }
 
-                        count++;
+                       // count++;
                     }
                 }//end for 
 

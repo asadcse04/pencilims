@@ -14,4 +14,7 @@ public interface InstituteSetupService
     public boolean updateInstitute(InstituteSetup instituteSetupObj);
     
     public List<InstituteSetup> instituteSetupList();
+    
+    public List<String> instituteNameList();
+    
 }

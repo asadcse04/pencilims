@@ -12,7 +12,7 @@
 
                 <p:growl id="grl" autoUpdate="true" sticky="false"/> 
 
-                <p:inputText id="search" value="#{at_A_GlanceController.studentSearch.studentID}"/> <p:commandButton value="Search" id="btsearch" action="#{at_A_GlanceController.viewStudentInfo}" update="grl nm gn fn gm ay shft cl sec dept roll" icon="ui-icon-search"/> <br /><br /><br />
+                <p:inputText id="search" value="#{at_A_GlanceController.studentSearch.studentID}"/> <p:commandButton value="Search" id="btsearch" action="#{at_A_GlanceController.viewStudentInfo}" update="grl nm gn fn gm ay shft cl sec dept roll :img" icon="ui-icon-search"/> <br /><br /><br />
 
                 <p:watermark  value="Search by student ID" for="search" id="name_watermark" />
 
@@ -36,17 +36,53 @@
 
         <p:layoutUnit position="center">
 
+            <p:row>
+                <p:column styleClass="label">                             
+                    <p:graphicImage value="/images/studentImages/#{at_A_GlanceController.studentSearch.imgPath}" width="250px" height="250px" id="img" />
+                </p:column>
+
+            </p:row>
+
             <br /><br />
-            <p:commandButton value="Personal Info"></p:commandButton>
-            <p:commandButton value="Previous Info"></p:commandButton>
-            <p:commandButton value="Result Info"></p:commandButton>
-              <br /><br />
-            <p:commandButton value="Account Info"></p:commandButton>
-            <p:commandButton value="Attendance Info"></p:commandButton>
-            <p:commandButton value="ID Card"></p:commandButton>
+<!--
+            <p:commandButton value="Ok" type="button" onclick="PF('ddd').show();" />
+-->
 
         </p:layoutUnit>
 
     </p:layout>
+
+
+
+
+
+    <p:dialog header="Basic Dialog" widgetVar="ddd" minHeight="40">
+        <h:form id="gg">
+        <p:outputLabel value="From date  "/>
+        <p:calendar value="#{attendanceInfoController.attendanceInfo.fromDate}"/>
+
+        <p:outputLabel value=" To date  "/>
+        <p:calendar value="#{attendanceInfoController.attendanceInfo.toDate}"/><br /> <br />
+
+        
+        <p:commandButton value="Search" update="love" action="#{attendanceInfoController.showReport()}"/>
+        
+        <p:dataTable id="love" value="#{attendanceInfoController.studentInfoList}" var="stInfo" style="width: 850px">
+ 
+                        <p:column headerText="Date">
+                        #{stInfo.date}    
+                        </p:column>
+                        
+                        <p:column headerText="note">
+                        #{stInfo.note}    
+                        </p:column>
+                        
+                    
+                    </p:dataTable>  
+</h:form>
+
+    </p:dialog>
+
+
 
 </ui:composition>

@@ -91,7 +91,7 @@ public class AssignStuffType implements Serializable {
     }
 
     public String getUserName() {
-        return UserName;
+        return UserName=String.valueOf(stuffID);
     }
 
     public void setUserName(String UserName) {

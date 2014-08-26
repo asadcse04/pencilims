@@ -27,41 +27,37 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
        
         Connection con=o.getConnection();
         
-        PreparedStatement  prst;
+        PreparedStatement  prst=null;
         
         try
         {          
-            prst = con.prepareStatement("insert into institute_setup values (null,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+            prst = con.prepareStatement("insert into institute_setup values ((select 1 from  test.institute_basic where InstituteName=?),?,?,?,?,?,?,?,?,?,?,?,?)");
                
             prst.setString(1,instituteSetup.getInstituteName());
+            
+            prst.setString(2,instituteSetup.getInstituteFullName());
                  
-            prst.setString(2,instituteSetup.getAddress());
+            prst.setString(3,instituteSetup.getAddress());
             
-            prst.setString(3,instituteSetup.getEstb());
+            prst.setString(4,instituteSetup.getEstb());
             
-            prst.setString(4,instituteSetup.getContactNo());
+            prst.setString(5,instituteSetup.getContactNo());
             
-            prst.setString(5,instituteSetup.getEmail());
+            prst.setString(6,instituteSetup.getEmail());
             
-            prst.setString(6,instituteSetup.getWebSite());
+            prst.setString(7,instituteSetup.getWebSite());
             
-            prst.setString(7,instituteSetup.getEinNo());
+            prst.setString(8,instituteSetup.getEinNo());
             
-            prst.setString(8,instituteSetup.getCode());
-            
-            prst.setString(9,instituteSetup.getInstituteType());
-            
-            prst.setString(10,instituteSetup.getEducationArea());
-            
-            prst.setString(11,instituteSetup.getBranchName());
-            
-            prst.setString(12,instituteSetup.getSlogan());
+            prst.setString(9,instituteSetup.getCode());
+ 
+            prst.setString(10,instituteSetup.getSlogan());
              
-            prst.setString(13,instituteSetup.getNote());
+            prst.setString(11,instituteSetup.getNote());
             
-            prst.setString(14,instituteSetup.getFooterDisplay());
+            prst.setString(12,instituteSetup.getImgPath());
             
-            prst.setString(15,instituteSetup.getImgPath());
+            prst.setString(13,instituteSetup.getBackgroundImgPath());
             
             prst.execute();
             
@@ -75,7 +71,24 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
         {
             System.out.println(e);
         }
-        
+        finally
+        {
+            try
+            {
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(con!=null)
+                {
+                    con.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e);
+            }
+        }
         return false;
     }
 
@@ -86,57 +99,70 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
        
         Connection con=o.getConnection();
         
-        PreparedStatement  prst;
+        PreparedStatement  prst = null;
         
-         try
-        {
-            prst = con.prepareStatement("update institute_setup set InstituteName=?, Address=?, ESTB=?, ContactNo=?, Email=?, WebSite=?, EINNo=?, Code=?, InstituteType=?, EducationArea=?, BranchName=?, Slogan=?, Note=?, FooterDisplay=?, Logo=? where InstituteID=? ");
-             
-            prst.setString(1,instituteSetupObj.getInstituteName());
-                 
-            prst.setString(2,instituteSetupObj.getAddress());
-            
-            prst.setString(3,instituteSetupObj.getEstb());
-            
-            prst.setString(4,instituteSetupObj.getContactNo());
-            
-            prst.setString(5,instituteSetupObj.getEmail());
-            
-            prst.setString(6,instituteSetupObj.getWebSite());
-            
-            prst.setString(7,instituteSetupObj.getEinNo());
-            
-            prst.setString(8,instituteSetupObj.getCode());
-            
-            prst.setString(9,instituteSetupObj.getInstituteType());
-            
-            prst.setString(10,instituteSetupObj.getEducationArea());
-            
-            prst.setString(11,instituteSetupObj.getBranchName());
-            
-            prst.setString(12,instituteSetupObj.getSlogan());
-             
-            prst.setString(13,instituteSetupObj.getNote());
-            
-            prst.setString(14,instituteSetupObj.getFooterDisplay());
-            
-            prst.setString(15,instituteSetupObj.getImgPath());
-            
-            prst.setInt(16,instituteSetupObj.getInstituteID());
-             
-            prst.execute();
-             
-            prst.close();
-
-            con.close();
-             
-            return true; 
-             
-           }
-            catch(SQLException e)
-           {
-            System.out.println(e);
-           }
+//         try
+//        {
+//            prst = con.prepareStatement("update institute_setup set InstituteID=(select InstituteID from  institute_basic where InstituteName=?), Address=?, ESTB=?, ContactNo=?, Email=?, WebSite=?, EINNo=?, Code=?, InstituteType=?, EducationArea=?, BranchName=?, Slogan=?, Note=?, FooterDisplay=?, Logo=? where ID=? ");
+//             
+//            prst.setString(1,instituteSetupObj.getInstituteName());
+//            
+//            prst.setString(2,instituteSetupObj.getInstituteFullName());
+//                 
+//            prst.setString(3,instituteSetupObj.getAddress());
+//            
+//            prst.setString(4,instituteSetupObj.getEstb());
+//            
+//            prst.setString(5,instituteSetupObj.getContactNo());
+//            
+//            prst.setString(6,instituteSetupObj.getEmail());
+//            
+//            prst.setString(7,instituteSetupObj.getWebSite());
+//            
+//            prst.setString(8,instituteSetupObj.getEinNo());
+//            
+//            prst.setString(9,instituteSetupObj.getCode());
+// 
+//            prst.setString(10,instituteSetupObj.getSlogan());
+//             
+//            prst.setString(11,instituteSetupObj.getNote());
+//            
+//            prst.setString(12,instituteSetupObj.getImgPath());
+//            
+//            prst.setString(13,instituteSetupObj.getBackgroundImgPath());
+//            
+//            prst.execute();
+//             
+//            prst.close();
+//
+//            con.close();
+//             
+//            return true; 
+//             
+//           }
+//            catch(SQLException e)
+//           {
+//            System.out.println(e);
+//           }
+//          finally
+//          {
+//            try
+//            {
+//                if(prst!=null)
+//                {
+//                    prst.close();
+//                }
+//                if(con!=null)
+//                {
+//                    con.close();
+//                }
+//            }
+//            catch(SQLException e)
+//            {
+//                System.out.println(e);
+//            }
+//        }
+         
           return false;
     }
 
@@ -147,16 +173,21 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
        
         Connection con=o.getConnection();
         
+        PreparedStatement prst=null;
+        
+        ResultSet rs=null;
+        
+        
         List<InstituteSetup> instituteList=new ArrayList<InstituteSetup>();
          try
           {
-            PreparedStatement prst = con.prepareStatement("select * from institute_setup ORDER BY InstituteID DESC LIMIT 1");
+            prst = con.prepareStatement("select * from institute_setup ORDER BY InstituteID DESC LIMIT 1");
             
-            ResultSet rs = prst.executeQuery();
+            rs = prst.executeQuery();
             
             while(rs.next())
             {
-                instituteList.add(new InstituteSetup(rs.getInt("InstituteID"), rs.getString("InstituteName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("InstituteType"), rs.getString("EducationArea"), rs.getString("BranchName"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("FooterDisplay"), rs.getString("Logo")));
+                instituteList.add(new InstituteSetup(rs.getString("InstituteID"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg")));
             }
 
             rs.close();
@@ -170,7 +201,85 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
 
             System.out.println(e);
           }
+         finally
+        {
+            try
+            {
+                if(rs!=null)
+                {
+                    rs.close();
+                }
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(con!=null)
+                {
+                    con.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e);
+            }
+        }
         
          return instituteList;
     }   
+
+    @Override
+    public List<String> instituteNameList()
+    {
+        DB_Connection o=new DB_Connection(); 
+       
+        Connection con=o.getConnection();
+        
+        PreparedStatement prst=null;
+        
+        ResultSet rs=null;
+        
+        List<String> insNameList=new ArrayList<String>();
+        
+        try
+        {
+            prst = con.prepareStatement("select InstituteName from test.institute_basic");
+            
+            rs = prst.executeQuery();
+            
+            while(rs.next())
+            {
+                insNameList.add(rs.getString("InstituteName"));
+            }
+        }
+        catch(SQLException e)
+        {
+            System.out.println(e);
+        }
+        finally
+        {
+            try
+            {
+                if(rs!=null)
+                {
+                    rs.close();
+                }
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(con!=null)
+                {
+                    con.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e);
+            }
+        }
+        
+        return insNameList;
+    }
+
+    
 }

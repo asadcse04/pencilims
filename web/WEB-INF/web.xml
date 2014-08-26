@@ -28,17 +28,43 @@
     
       <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Security Check</web-resource-name>
-            
+            <web-resource-name>Security Check</web-resource-name>          
             <url-pattern>/DesktopPencil/admin/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+        </auth-constraint> 
+    </security-constraint>
+    
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Security Check for co-admin</web-resource-name>
+            
+            <url-pattern>/DesktopPencil/co_admin/*</url-pattern>
 
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>
+            <role-name>co_admin</role-name>
         </auth-constraint>
-    </security-constraint>
+    </security-constraint> 
+     
     
     <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Security Check for operator</web-resource-name>
+            
+            <url-pattern>/DesktopPencil/operator/*</url-pattern>
+
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>admin</role-name>
+            <role-name>co_admin</role-name>
+            <role-name>operator</role-name>
+        </auth-constraint>
+    </security-constraint> 
+    
+     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Security Check for teacher</web-resource-name>
             
@@ -47,22 +73,9 @@
         </web-resource-collection>
         <auth-constraint>
             <role-name>admin</role-name>
+            <role-name>co_admin</role-name>
+            <role-name>operator</role-name>
             <role-name>teacher</role-name>
-        </auth-constraint>
-    </security-constraint> 
-     
-    
-    <security-constraint>
-        <web-resource-collection>
-            <web-resource-name>Security Check for student</web-resource-name>
-            
-            <url-pattern>/DesktopPencil/student/*</url-pattern>
-
-        </web-resource-collection>
-        <auth-constraint>
-            <role-name>admin</role-name>
-            <role-name>teacher</role-name>
-            <role-name>student</role-name>
         </auth-constraint>
     </security-constraint> 
     

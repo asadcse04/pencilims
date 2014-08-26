@@ -89,7 +89,7 @@ public class LoginController implements Serializable {
             request.login(this.username, this.password);
             this.user = request.getUserPrincipal().getName();
             HttpSession s = request.getSession();
-            s.setAttribute("user", this.user);
+            s.setAttribute("userName", this.user);
 
         } 
         catch (ServletException e) 
@@ -101,22 +101,30 @@ public class LoginController implements Serializable {
         try 
         {
 
-            if (this.roleName.equals("Admin")) {
+            if (this.roleName.equals("admin")) {
 
                 requestedURI = "admin/index.xhtml";
 
             }
 
-            if (this.roleName.equals("Teacher")) {
+            else if(this.roleName.equals("co_admin")) {
 
-                requestedURI = "teacher/index.xhtml";
+                requestedURI = "co_admin/index.xhtml";
 
             }
 
-            if (this.roleName.equals("Student")) {
+            else if (this.roleName.equals("operator")) {
 
-                requestedURI = "student/index.xhtml";
+                requestedURI = "operator/index.xhtml";
 
+            }
+            
+            else if (this.roleName.equals("teacher")) {
+
+                requestedURI = "teacher/index.xhtml";
+
+            }else{
+                 requestedURI = "ErrorPage.xhtml";
             }
 
             context.getExternalContext().redirect(requestedURI);

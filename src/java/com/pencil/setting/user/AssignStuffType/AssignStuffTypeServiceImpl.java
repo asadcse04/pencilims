@@ -30,23 +30,19 @@ public class AssignStuffTypeServiceImpl implements AssignStuffTypeService, Seria
         PreparedStatement prst = null;
         try {
 
-            prst = con.prepareStatement("insert into user values (?,?,?,null,?,?,?,?,?)");
+            prst = con.prepareStatement("insert into users values (?,?)");
 
-            prst.setInt(1, assignUserType.getStuffID());
+            prst.setString(1, assignUserType.getUserName());
 
-            prst.setString(2, assignUserType.getStuffName());
+            prst.setString(2, assignUserType.getPassword());
             
-            prst.setString(3, assignUserType.getContactNo());
+            prst.execute();
             
-            prst.setString(4, assignUserType.getUserName());
+            prst = con.prepareStatement("insert into user_roles values (?,?)");
             
-            prst.setString(5, assignUserType.getPassword());
+            prst.setString(1, assignUserType.getUserName());
             
-            prst.setString(6, assignUserType.getUserType());
-            
-            prst.setString(7, assignUserType.getUserTypeCode());
-            
-            prst.setString(8, assignUserType.getNote());
+            prst.setString(2, assignUserType.getUserType());
 
             prst.execute();
 
@@ -96,7 +92,7 @@ public class AssignStuffTypeServiceImpl implements AssignStuffTypeService, Seria
 
         try {
 
-            prst = con.prepareStatement("select t.StuffID, t.StuffName, t.Gender, tc.ContactNo from stuff t, stuff_contact_info tc where t.StuffID=tc.StuffID and t.StuffID not in (select id from user) ");
+            prst = con.prepareStatement("select t.StuffID, t.StuffName, t.Gender, tc.ContactNo from stuff t, stuff_contact_info tc where t.StuffID=tc.StuffID and t.StuffID not in (select user_name from users)");
 
             rs = prst.executeQuery();
 
