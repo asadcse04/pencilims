@@ -56,7 +56,7 @@ public class SmsStutas implements Serializable{
     }
 
     public String getStatusType() {
-        if(this.status==1){
+        if(this.status==0){
             this.statusType="Inactive";
         }else{
             this.statusType="Active";

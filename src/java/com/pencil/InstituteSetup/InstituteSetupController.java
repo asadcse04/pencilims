@@ -51,9 +51,9 @@ public class InstituteSetupController implements Serializable
         System.out.println(s.getAttribute("user"));
         
        
-        this.InstituteList = InstituteDao.instituteSetupList();
-         
-        this.invstituteNameData = InstituteDao.instituteNameList();
+//        this.InstituteList = InstituteDao.instituteSetupList();
+//         
+//        this.invstituteNameData = InstituteDao.instituteNameList();
          
     }
     
@@ -121,7 +121,7 @@ public class InstituteSetupController implements Serializable
    
     public InstituteSetup getInstituteSetup()
     {
-         if (this.instituteSetup == null) 
+         if (this.instituteSetup==null) 
         {
             this.instituteSetup = new InstituteSetup();
         }

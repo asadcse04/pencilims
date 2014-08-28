@@ -31,9 +31,9 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
         
         try
         {          
-            prst = con.prepareStatement("insert into institute_setup values ((select 1 from  test.institute_basic where InstituteName=?),?,?,?,?,?,?,?,?,?,?,?,?)");
+            prst = con.prepareStatement("insert into institute_setup values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
                
-            prst.setString(1,instituteSetup.getInstituteName());
+            prst.setString(1,instituteSetup.getInstituteID());
             
             prst.setString(2,instituteSetup.getInstituteFullName());
                  
@@ -226,7 +226,132 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
         
          return instituteList;
     }   
+    
+    @Override
+    public InstituteSetup instituteSetup()
+    {
+        DB_Connection o=new DB_Connection(); 
+       
+        Connection con=o.getConnection();
+        
+        PreparedStatement prst=null;
+        
+        ResultSet rs=null;
+        
+        
+        InstituteSetup instituteSetup=new InstituteSetup();
+         try
+          {
+            prst = con.prepareStatement("select * from institute_setup ORDER BY InstituteID DESC LIMIT 1");
+            
+            rs = prst.executeQuery();
+            
+            while(rs.next())
+            {
+                instituteSetup=new InstituteSetup(rs.getString("InstituteID"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"));
+            }
 
+            rs.close();
+            
+            prst.close();
+            
+            con.close();
+          } 
+          catch (SQLException e)
+          {
+
+            System.out.println(e);
+          }
+         finally
+        {
+            try
+            {
+                if(rs!=null)
+                {
+                    rs.close();
+                }
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(con!=null)
+                {
+                    con.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e);
+            }
+        }
+        
+         return instituteSetup;
+    }   
+
+    
+    @Override
+    public InstituteSetup getInstituteById(String id)
+    {
+        DB_Connection o=new DB_Connection(); 
+       
+        Connection con=o.getConnection();
+        
+        PreparedStatement prst=null;
+        
+        ResultSet rs=null;
+        
+        
+        InstituteSetup instituteSetup=new InstituteSetup();
+         try
+          {
+            prst = con.prepareStatement("select * from institute_setup where instituteId=? ORDER BY InstituteID DESC LIMIT 1");
+            
+            prst.setString(1, id);
+            
+            rs = prst.executeQuery();
+            
+            while(rs.next())
+            {
+                instituteSetup=new InstituteSetup(rs.getString("InstituteID"), rs.getString("InstituteFullName"), rs.getString("Address"), rs.getString("ESTB"), rs.getString("ContactNo"), rs.getString("Email"), rs.getString("WebSite"), rs.getString("EINNo"), rs.getString("Code"), rs.getString("Slogan"), rs.getString("Note"), rs.getString("Logo"), rs.getString("BackGroundImg"));
+            }
+
+            rs.close();
+            
+            prst.close();
+            
+            con.close();
+          } 
+          catch (SQLException e)
+          {
+
+            System.out.println(e);
+          }
+         finally
+        {
+            try
+            {
+                if(rs!=null)
+                {
+                    rs.close();
+                }
+                if(prst!=null)
+                {
+                    prst.close();
+                }
+                if(con!=null)
+                {
+                    con.close();
+                }
+            }
+            catch(SQLException e)
+            {
+                System.out.println(e);
+            }
+        }
+        
+         return instituteSetup;
+    }   
+    
     @Override
     public List<String> instituteNameList()
     {

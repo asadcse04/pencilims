@@ -89,10 +89,7 @@
                 </p:submenu> 
 
                 <p:submenu icon="ui-icon-clipboard" label="Attendance">  
-                    <p:submenu icon="ui-icon-arrowthick-1-s" label="Take Attendance">
-                        <p:menuitem value="Student" onclick="PF('studentAttendance').show();" icon="ui-icon-disk"></p:menuitem>                   
-                        <p:menuitem value="Teacher" onclick="PF('teacherAttendance').show();" icon="ui-icon-copy"></p:menuitem>           
-                    </p:submenu> 
+                 
                     <p:submenu icon="ui-icon-bookmark" label="Blank Sheet">
                         <p:menuitem value="Student" onclick="PF('studentAttendanceSheet').show();" icon="ui-icon-clipboard"></p:menuitem>                   
                         <p:menuitem value="Teacher" onclick="PF('teacherAttendanceSheet').show();" icon="ui-icon-document"></p:menuitem>           
@@ -179,7 +176,7 @@
                 
                 
                 <p:submenu icon="ui-icon-person" label="User">                  
-                    <p:menuitem value="LogOut" action="#{loginController.logout()}" icon="ui-icon-eject"></p:menuitem>
+                    <p:menuitem value="LogOut" action="#{logoutController.logout()}" icon="ui-icon-eject"></p:menuitem>
                 </p:submenu> 
 
 

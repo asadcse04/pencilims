@@ -8,6 +8,9 @@ package com.pencil.Dummy.Teacher.SMS;
 import com.pencil.Dummy.Teacher.Teacher;
 import com.pencil.Dummy.Teacher.TeacherService;
 import com.pencil.Dummy.Teacher.TeacherServiceImpl;
+import com.pencil.InstituteSetup.InstituteSetup;
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SMS.SMS_Service;
 import com.pencil.SMS.SMS_ServiceImpl;
 import java.io.Serializable;
@@ -16,6 +19,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.websocket.Session;
 
 /**
  *
@@ -40,11 +44,14 @@ public class SendSmsTeacherController implements Serializable
     private List<Teacher> selectedTeacher;  //the list of teacher after selection
 
     private TeacherDataModel teacher_data_model;
-    
 
     private String message;
     
     private int smsBal;
+    
+    private InstituteSetup institute = new InstituteSetup();
+    
+    private int instituteId;
     
 
     SendSms_Teacher_Service serviceDao = new SendSms_Teacher_ServiceImpl();
@@ -52,6 +59,8 @@ public class SendSmsTeacherController implements Serializable
     TeacherService teacherService = new TeacherServiceImpl();
     
     SMS_Service msgservice=new SMS_ServiceImpl();
+    
+    InstituteSetupService instituteService = new InstituteSetupServiceImpl();
 
     /**
      *
@@ -62,7 +71,16 @@ public class SendSmsTeacherController implements Serializable
 
         teacher_data_model = new TeacherDataModel(this.teacharList);
         
-        this.smsBal=msgservice.getSmsCurrent_Ac_Balance(1);//schoolid
+        institute = instituteService.instituteSetup();
+        
+        if(institute!=null){
+            
+        instituteId= Integer.valueOf(institute.getInstituteID());
+        
+        this.smsBal=msgservice.getSmsCurrent_Ac_Balance(instituteId); //schoolid
+        }
+        
+       // this.smsBal=msgservice.getSmsCurrent_Ac_Balance(1);//schoolid
     }
 
     /**

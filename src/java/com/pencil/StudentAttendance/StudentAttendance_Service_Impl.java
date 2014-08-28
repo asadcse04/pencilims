@@ -6,6 +6,9 @@ package com.pencil.StudentAttendance;
 
 import com.pencil.Connection.DB_Connection;
 import com.pencil.Dummy.Student.Student_Registration;
+import com.pencil.InstituteSetup.InstituteSetup;
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SMS.SMS_Service;
 import com.pencil.SMS.SMS_ServiceImpl;
 import com.pencil.ScClassConfig.ScClassConfig;
@@ -377,6 +380,15 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
         CallableStatement cs = null;
         
         ResultSet rs = null;
+        
+        InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+        
+        InstituteSetup institute = new InstituteSetup();
+        
+        institute = instituteService.instituteSetup();
+        
+        int instituteId = Integer.valueOf(institute.getInstituteID());
+        
             
         SMS_Service smsService=new SMS_ServiceImpl();
              
@@ -415,7 +427,9 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
 
                 cs.setInt(1, count);
 
-                cs.setInt(2, 1);//school id
+                //cs.setInt(2, 1); //school id
+                
+                 cs.setInt(2, instituteId); //school id
 
                 cs.execute();
             }

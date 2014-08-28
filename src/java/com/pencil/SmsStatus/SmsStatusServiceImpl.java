@@ -7,6 +7,9 @@
 package com.pencil.SmsStatus;
 
 import com.pencil.Connection.DB_Connection;
+import com.pencil.InstituteSetup.InstituteSetup;
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -22,6 +25,9 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
     @Override
     public SmsStutas statusList() {
         // List<SmsStutas> buildingList = new ArrayList<SmsStutas>();
+        
+        InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+        
         SmsStutas smsStatus = new SmsStutas();
 
         DB_Connection o = new DB_Connection();
@@ -31,10 +37,27 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
         PreparedStatement prst = null;
 
         ResultSet rs = null;
+        
+        
+             
+         InstituteSetup institute = new InstituteSetup();
+    
+        String instituteId="";
+        
+        institute = instituteService.instituteSetup();
+        
+        if(institute!=null){
+            
+        instituteId= institute.getInstituteID();      
+        
+        }
 
-        try {
+         try {
+       
 
-            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID = 1");
+            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID = ?");
+            
+            prst.setString(1, instituteId);
 
             rs = prst.executeQuery();
 

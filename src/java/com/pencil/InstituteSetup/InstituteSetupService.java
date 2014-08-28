@@ -15,6 +15,10 @@ public interface InstituteSetupService
     
     public List<InstituteSetup> instituteSetupList();
     
+    public InstituteSetup instituteSetup();
+    
+    public InstituteSetup getInstituteById(String id);
+    
     public List<String> instituteNameList();
     
 }

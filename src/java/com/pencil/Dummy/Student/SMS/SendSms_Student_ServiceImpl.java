@@ -8,6 +8,9 @@ package com.pencil.Dummy.Student.SMS;
 
 import com.pencil.Connection.DB_Connection;
 import com.pencil.Dummy.Student.Student_Registration;
+import com.pencil.InstituteSetup.InstituteSetup;
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SMS.SMS_Service;
 import com.pencil.SMS.SMS_ServiceImpl;
 import java.io.Serializable;
@@ -28,10 +31,11 @@ public class SendSms_Student_ServiceImpl implements SendSms_Student_Service,Seri
      *
      * @param selectedStudentArry
      * @param message
+     * @param smsBal
      * @return
      */
     @Override
-    public boolean sendSms(List<Student_Registration> selectedStudentArry, String message)
+    public boolean sendSms(List<Student_Registration> selectedStudentArry, String message,int smsBal)
     {       
         DB_Connection o = new DB_Connection();
 
@@ -45,80 +49,101 @@ public class SendSms_Student_ServiceImpl implements SendSms_Student_Service,Seri
         
         SMS_Service service=new SMS_ServiceImpl();
         
+        
+        InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+        
+        InstituteSetup institute = new InstituteSetup();
+        
+        institute = instituteService.instituteSetup();
+        
+        int instituteId = Integer.valueOf(institute.getInstituteID());
+        
         StringBuilder grdn_cntnoList=new StringBuilder();
         
-        try
-        {    
-            con.setAutoCommit(false);
-
-            prst=con.prepareStatement("insert into student_sms_record values(null,?,?,?,now())");
-            
-            for(Student_Registration student : selectedStudentArry)
-            {
-                prst.setString(1, student.getStudentID());
-
-                prst.setString(2, student.getGuardianContactNo());
-
-                prst.setString(3, message);
-
-                prst.addBatch();
-                
-                grdn_cntnoList.append(student.getGuardianContactNo());
-                
-                grdn_cntnoList.append(",");
-            }
-            
-            if(grdn_cntnoList.length()>0)
-            {
-                grdn_cntnoList.setLength(grdn_cntnoList.length()-1);
-                
-                if(service.sendBulkSms(grdn_cntnoList,message)==200)
-                {
-                    int[] update = prst.executeBatch();
-                    
-                    cs = cn.prepareCall("{call smsCntManage(?,?)}");
-            
-                    cs.setInt(1,update.length);
-
-                    cs.setInt(2,1);
-
-                    cs.execute();
-
-                    con.commit();
-
-                    return true;
-                }
-            }
-        } 
-        catch (SQLException ex)
-        {
-            System.out.println(ex);
-        }
-        finally
+        int count=0;
+        
+        if(smsBal!=0)
         {
             try
             {
-                if (prst != null)
+                con.setAutoCommit(false);
+
+                prst = con.prepareStatement("insert into student_sms_record values(null,?,?,?,now())");
+
+                for (Student_Registration student : selectedStudentArry)
                 {
-                    prst.close();
+                    if (count <= smsBal)
+                    {
+                        prst.setString(1, student.getStudentID());
+
+                        prst.setString(2, student.getGuardianContactNo());
+
+                        prst.setString(3, message);
+
+                        prst.addBatch();
+
+                        grdn_cntnoList.append(student.getGuardianContactNo());
+
+                        grdn_cntnoList.append(",");
+                    }
+
+                    count = count + 1;
                 }
-                if (cs != null)
+
+                if (grdn_cntnoList.length() > 0)
                 {
-                    cs.close();
+                    grdn_cntnoList.setLength(grdn_cntnoList.length() - 1);
+
+                    if (service.sendBulkSms(grdn_cntnoList, message) == 200)
+                    {
+                        int[] update = prst.executeBatch();
+
+                        cs = cn.prepareCall("{call smsCntManage(?,?)}");
+
+                        cs.setInt(1, update.length);
+
+                        //cs.setInt(2, 1);
+                        
+                         cs.setInt(2, instituteId);
+
+                        cs.execute();
+
+                        con.commit();
+
+                        return true;
+                    }
                 }
-                if (con != null)
-                {
-                    con.close();
-                }
-            } 
+            }
             catch (SQLException ex)
             {
                 System.out.println(ex);
+            } 
+            finally
+            {
+                try
+                {
+                    if (prst != null)
+                    {
+                        prst.close();
+                    }
+                    if (cs != null)
+                    {
+                        cs.close();
+                    }
+                    if (con != null)
+                    {
+                        con.close();
+                    }
+                } 
+                catch (SQLException ex) 
+                {
+                    System.out.println(ex);
+                }
+
+                selectedStudentArry.clear();
+
+                message = null;
             }
-            
-            selectedStudentArry.clear();
-            
-            message=null;
         }
         
         return false;

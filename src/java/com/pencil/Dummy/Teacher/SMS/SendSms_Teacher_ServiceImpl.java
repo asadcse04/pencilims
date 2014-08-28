@@ -8,6 +8,9 @@ package com.pencil.Dummy.Teacher.SMS;
 
 import com.pencil.Connection.DB_Connection;
 import com.pencil.Dummy.Teacher.Teacher;
+import com.pencil.InstituteSetup.InstituteSetup;
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SMS.SMS_Service;
 import com.pencil.SMS.SMS_ServiceImpl;
 import java.io.Serializable;
@@ -44,9 +47,20 @@ public class SendSms_Teacher_ServiceImpl implements SendSms_Teacher_Service,Seri
         
         CallableStatement cs = null;
         
+        //////  asad   /////
+        
         SMS_Service service=new SMS_ServiceImpl();
         
         StringBuilder cntnoList=new StringBuilder();
+        
+         InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+        
+        InstituteSetup institute = new InstituteSetup();
+        
+        institute = instituteService.instituteSetup();
+        
+        int instituteId = Integer.valueOf(institute.getInstituteID());
+        
         
         int count=0;
         
@@ -90,7 +104,9 @@ public class SendSms_Teacher_ServiceImpl implements SendSms_Teacher_Service,Seri
 
                         cs.setInt(1, update.length);
 
-                        cs.setInt(2, 1);
+                        //cs.setInt(2, 1);
+                        
+                        cs.setInt(2, instituteId);
 
                         cs.execute();
 

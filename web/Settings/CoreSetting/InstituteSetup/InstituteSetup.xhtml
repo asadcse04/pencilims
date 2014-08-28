@@ -14,15 +14,25 @@
                 </p:row>
                 
                 <p:row>
+                    <!--
                     <p:column styleClass="label">
                         <h:outputText value="*" styleClass="red"/>
                         <h:outputText value="Select Institute:"/>
                     </p:column><p:column style="width: 130px;">
-                        <p:selectOneMenu value="#{instituteSetupController.instituteSetup.instituteName}" effect="slide" required="true" requiredMessage="Please Select Institute Name.">  
+                        <p:selectOneMenu value="" effect="slide" required="true" requiredMessage="Please Select Institute Name.">  
                             <f:selectItem itemLabel="Select Institute Name" itemValue="" />  
-                            <f:selectItems value="#{instituteSetupController.invstituteNameData}" />
+                            <f:selectItems value="" />
                         </p:selectOneMenu>
                     </p:column>
+                    -->
+                    
+                     <p:column styleClass="label">
+                        <h:outputText value="*" styleClass="red"/>
+                        <h:outputText value="Institute Id:"/>
+                    </p:column><p:column style="width: 130px;">
+                        <p:inputText value="#{instituteSetupController.instituteSetup.instituteID}" styleClass="inputText" required="true" requiredMessage="Please Enter Institute Name."/>
+                    </p:column>
+                   
                     
                     <p:column styleClass="label">
                         <h:outputText value="*" styleClass="red"/>
@@ -30,6 +40,8 @@
                     </p:column><p:column style="width: 130px;">
                         <p:inputText value="#{instituteSetupController.instituteSetup.instituteFullName}" styleClass="inputText" required="true" requiredMessage="Please Enter Institute Name."/>
                     </p:column>
+                    
+                    
 
 
                     <p:column styleClass="label">

@@ -165,21 +165,21 @@
 
                             </h:panelGroup>
 
-                            <p:selectOneMenu value="#{loginController.roleName}" required="true"  requiredMessage="User Type can not be empty." style="width: 130px;">  
+                            <p:selectOneMenu value="#{loginController.role}" required="true"  requiredMessage="User Type can not be empty." style="width: 130px;">  
 
                                 <f:selectItem itemLabel="Select One" itemValue="" />  
 
-                                <f:selectItem itemLabel="Admin" itemValue="admin"/> 
-
-                                <f:selectItem itemLabel="Co-Admin" itemValue="co_admin"/>
+                                <f:selectItem itemLabel="Admin" itemValue="Admin"/> 
                                 
-                                <f:selectItem itemLabel="Operator" itemValue="operator"/>
+                                 <f:selectItem itemLabel="Operator" itemValue="Operator"/>
 
-                                <f:selectItem itemLabel="Teacher" itemValue="teacher"/>
+                                <f:selectItem itemLabel="Teacher" itemValue="Teacher"/>
+                                
+                                <f:selectItem itemLabel="Student" itemValue="Student"/>
 
                             </p:selectOneMenu> <br/>
    
-                            <p:commandButton id="submitButton" action="#{loginController.login()}" update="loginPanalGrid" value="Login" icon="ui-icon-check" ajax="false"/>
+                            <p:commandButton id="submitButton" action="#{loginController.checkLogin()}" update="loginPanalGrid" value="Login" icon="ui-icon-check" ajax="false"/>
 
                             <p:commandLink id="link" value="Forgot password?" action="/Dummy/PasswordMessage.xhtml"/>
 
@@ -203,22 +203,5 @@
         </div>
 
     </h:body>
-    
-     <p:ajaxStatus style="width:64px;height:64px;position:fixed;right:5px;bottom:5px">  
-
-        <f:facet name="start">  
-
-            <p:graphicImage value="/images/Ajax/loading.gif" />  
-
-        </f:facet>  
-
-        <f:facet name="complete">  
-
-            <h:outputText value="" />  
-
-        </f:facet>  
-
-    </p:ajaxStatus>
-    
 </html>
 
