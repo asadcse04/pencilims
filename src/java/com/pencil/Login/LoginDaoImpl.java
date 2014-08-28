@@ -61,6 +61,7 @@ public class LoginDaoImpl implements LoginDao {
             {
                 context.getExternalContext().getSessionMap().put("UserID",rs.getInt(1));
                 
+                
                 return true;
             }
         }

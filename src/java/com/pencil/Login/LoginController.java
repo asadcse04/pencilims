@@ -121,32 +121,26 @@ public class LoginController implements Serializable {
      */
     public LoginController() {
 
-       
 
     }
 
-    /**
-     *
-     * @return
-     */
+
     public String checkLogin() {
         
          String[] temp;
-
-         
-        String delimiter = "-";
-
-        temp = username.split(delimiter);
+        temp = username.split("-");
         usrName = temp[0];
-        instituteId = temp[1];
-
-       
+        instituteId = temp[1];     
 
         institute = instituteService.getInstituteById(instituteId);
         
-        
+                
         
         FacesContext context = FacesContext.getCurrentInstance();
+       
+        context.getExternalContext().getSessionMap().put("instituteID",instituteId);
+        context.getExternalContext().getSessionMap().put("instituteName",institute.getInstituteFullName());
+        context.getExternalContext().getSessionMap().put("instituteLogo",institute.getImgPath());
 
         LoginDao dao = new LoginDaoImpl();
 
