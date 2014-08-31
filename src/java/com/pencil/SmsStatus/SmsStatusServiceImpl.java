@@ -40,7 +40,7 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
         
         
              
-         InstituteSetup institute = new InstituteSetup();
+        InstituteSetup institute = new InstituteSetup();
     
         String instituteId="";
         
@@ -55,9 +55,9 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
          try {
        
 
-            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID = ?");
+            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID ='1'");
             
-            prst.setString(1, instituteId);
+           // prst.setString(1, instituteId);
 
             rs = prst.executeQuery();
 

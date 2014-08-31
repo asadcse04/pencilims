@@ -6,12 +6,15 @@
 
 package com.pencil.StudentAttendance;
 
+import com.pencil.Dummy.Student.Student_Registration;
+import com.pencil.InstituteSetup.InstituteSetup; 
+import com.pencil.InstituteSetup.InstituteSetupService;
+import com.pencil.InstituteSetup.InstituteSetupServiceImpl; 
 import com.pencil.SMS.SMS_Service;
-import com.pencil.SMS.SMS_ServiceImpl; 
+import com.pencil.SMS.SMS_ServiceImpl;
 import com.pencil.ScClassConfig.ScClassConfig;
 import com.pencil.ScClassConfig.Sc_ClassCofigService_Impl;
 import com.pencil.ScClassConfig.Sc_ClassConfigService;
-import com.pencil.Dummy.Student.Student_Registration;
 import java.util.Date;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -55,6 +58,8 @@ public class StudentAttendanceController {
     
     SMS_Service smsService=new SMS_ServiceImpl();
     
+    InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+    
     
     private QrOption queryOption;
     
@@ -71,7 +76,15 @@ public class StudentAttendanceController {
     {
         this.school_configList=scCnfService.scClassConfiguration_List_ed();
         
-        this.sms_bal = smsService.getSmsCurrent_Ac_Balance(1);//Schoolid:1
+         InstituteSetup institute = new InstituteSetup();
+        
+        institute = instituteService.instituteSetup();
+        
+        int instituteId = Integer.valueOf(institute.getInstituteID());
+        
+        this.sms_bal = smsService.getSmsCurrent_Ac_Balance(instituteId);//Schoolid:1 
+        
+       // this.sms_bal = smsService.getSmsCurrent_Ac_Balance(1);//Schoolid:1
         
         System.out.println(this.sms_bal);
     }

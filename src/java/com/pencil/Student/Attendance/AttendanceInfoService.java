@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package com.pencil.StudentAtAGlance;
+package com.pencil.Student.Attendance;
 
 import java.util.List;
 

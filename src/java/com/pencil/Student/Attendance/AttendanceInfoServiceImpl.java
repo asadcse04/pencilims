@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.pencil.StudentAtAGlance;
+package com.pencil.Student.Attendance;
 
 import com.pencil.Connection.DB_Connection;
 import java.io.Serializable;
@@ -221,6 +221,7 @@ public class AttendanceInfoServiceImpl implements AttendanceInfoService, Seriali
 
         return allInfo;
     }
+    
     }
 
 
