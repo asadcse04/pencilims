@@ -15,6 +15,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -43,6 +44,10 @@ public class ResultServiceImpl implements Serializable,StudentExamResultService
         PreparedStatement prst = null;
         
         ResultSet rs = null;
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+        context.getExternalContext().getSessionMap().put("Examname", ExamName);
+        
         
         try
         {

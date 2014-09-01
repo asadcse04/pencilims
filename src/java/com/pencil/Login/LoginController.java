@@ -9,6 +9,7 @@ import com.pencil.InstituteSetup.InstituteSetupService;
 import com.pencil.InstituteSetup.InstituteSetupServiceImpl;
 import com.pencil.SystemUser.SystemUser;
 import java.io.Serializable;
+import java.util.regex.Pattern;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -129,6 +130,8 @@ public class LoginController implements Serializable {
         
         String[] temp;
         temp = username.split("-");
+        
+        
         usrName = temp[0];
         instituteId = temp[1];     
 
@@ -146,6 +149,8 @@ public class LoginController implements Serializable {
         context.getExternalContext().getSessionMap().put("SchoolID",institute.getInstituteID());
         context.getExternalContext().getSessionMap().put("SchoolImage",institute.getBackgroundImgPath());
         context.getExternalContext().getSessionMap().put("SchoolLogo",institute.getImgPath());
+        context.getExternalContext().getSessionMap().put("SchoolAddress",institute.getAddress());
+
         
          //Object attribute = FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("SchoolName");
       
@@ -184,6 +189,7 @@ public class LoginController implements Serializable {
             }
 
         } else {
+            
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Invalid System User.", ""));
         }
 

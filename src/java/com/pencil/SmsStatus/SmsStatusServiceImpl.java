@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -44,20 +45,24 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
     
         String instituteId="";
         
-        institute = instituteService.instituteSetup();
+//        institute = instituteService.instituteSetup();
+//        
+//        if(institute!=null){
+//            
+//        instituteId= institute.getInstituteID();      
+//        
+//        }
         
-        if(institute!=null){
-            
-        instituteId= institute.getInstituteID();      
+        FacesContext context=FacesContext.getCurrentInstance();
         
-        }
+        instituteId=context.getExternalContext().getSessionMap().get("SchoolID").toString();
 
          try {
        
 
-            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID ='1'");
+            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID =?");
             
-           // prst.setString(1, instituteId);
+            prst.setString(1, instituteId);
 
             rs = prst.executeQuery();
 

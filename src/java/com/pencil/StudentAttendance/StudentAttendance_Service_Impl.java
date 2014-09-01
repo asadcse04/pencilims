@@ -216,11 +216,11 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
         try
         {
             prst=con.prepareStatement("select distinct sa.StudentID FROM student_attendence sa,student_identification si where si.StudentID=sa.StudentID "
-                    + "and si.ClassConfigID IN("+scCnf.toString()+") and sa.AttendanceDate IN("+new java.sql.Date(ad.getTime())+")");
+                    + "and si.ClassConfigID IN('"+scCnf.toString()+"') and sa.AttendanceDate=?");
            
             //prst.setString(1,scCnf.toString());
             
-            //prst.setDate(1,new java.sql.Date(ad.getTime()));
+            prst.setDate(1,new java.sql.Date(ad.getTime()));
             
             rs = prst.executeQuery();
             
