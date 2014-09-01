@@ -60,7 +60,7 @@ public class SmsStatusServiceImpl implements SmsStatusService, Serializable{
          try {
        
 
-            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from test.sms_manage where School_ID =?");
+            prst = con.prepareStatement("select AccountBalance, ActiveTo, Status from ims_manager.sms_manage where School_ID =?");
             
             prst.setString(1, instituteId);
 

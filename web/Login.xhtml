@@ -144,7 +144,7 @@
                             </h:panelGroup>
 
                             <p:inputText id="userName" value="#{loginController.username}" required="true" label="User Name" title="Enter your User Name" validatorMessage="Please Enter format 'userId-instituteId'">
-                                <f:validateRegex pattern="^\d{5,7}-.{1,7}$"/>
+                                <f:validateRegex pattern="^.{5,20}-.{1,20}$"/>
                             </p:inputText>
 
                             <p:tooltip for="userName" showEffect="slide" hideEffect="slide"/>

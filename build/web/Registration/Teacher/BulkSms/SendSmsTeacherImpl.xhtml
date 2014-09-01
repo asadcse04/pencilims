@@ -15,7 +15,7 @@
 
             <p:dataTable value="#{sendSmsTeacherController.teacher_data_model}" var="sms_teacher_tbl" selection="#{sendSmsTeacherController.selectedTeacher}" filteredValue="#{sendSmsTeacherController.teachar_filter_list}"
 
-                         paginator="true" rows="20" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})">
+                         paginator="true" rows="100" paginatorPosition="bottom" scrollable="true" scrollHeight="500" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})">
 
 
                 <p:column selectionMode="multiple" style="width:2%" /> 

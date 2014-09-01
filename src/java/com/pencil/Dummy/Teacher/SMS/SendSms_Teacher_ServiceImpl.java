@@ -19,6 +19,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -53,14 +54,26 @@ public class SendSms_Teacher_ServiceImpl implements SendSms_Teacher_Service,Seri
         
         StringBuilder cntnoList=new StringBuilder();
         
-         InstituteSetupService instituteService = new InstituteSetupServiceImpl();
         
-        InstituteSetup institute = new InstituteSetup();
         
-        institute = instituteService.instituteSetup();
+        String instituteID="";
         
-        int instituteId = Integer.valueOf(institute.getInstituteID());
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
+        int instituteId=Integer.valueOf(instituteID);
+        
+        
+        
+//         InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+//        
+//        InstituteSetup institute = new InstituteSetup();
+//        
+//        institute = instituteService.instituteSetup();
+//        
+//        int instituteId = Integer.valueOf(institute.getInstituteID());
+//        
         
         int count=0;
         

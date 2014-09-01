@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -385,13 +386,24 @@ public class StudentAttendance_Service_Impl implements Serializable,StudentAtten
         
         ResultSet rs = null;
         
-        InstituteSetupService instituteService = new InstituteSetupServiceImpl();
         
-        InstituteSetup institute = new InstituteSetup();
         
-        institute = instituteService.instituteSetup();
+        String instituteID="";
         
-        int instituteId = Integer.valueOf(institute.getInstituteID());
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        int instituteId=Integer.valueOf(instituteID);
+        
+        
+//        InstituteSetupService instituteService = new InstituteSetupServiceImpl();
+//        
+//        InstituteSetup institute = new InstituteSetup();
+//        
+//        institute = instituteService.instituteSetup();
+//        
+//        int instituteId = Integer.valueOf(institute.getInstituteID());
         
             
         SMS_Service smsService=new SMS_ServiceImpl();

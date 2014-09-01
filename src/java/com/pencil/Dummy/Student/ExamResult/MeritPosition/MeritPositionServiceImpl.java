@@ -19,6 +19,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -350,19 +351,33 @@ public class MeritPositionServiceImpl implements Serializable, MeritPositionServ
 
     @Override
     public boolean send_Student_result_Sms(List<StudentMeritList> studentList, SMS_Service smsC) {
-        InstituteSetup institute = new InstituteSetup();
-
-        institute = instituteService.instituteSetup();
-
-        int instituteId=1;
-
+        
+        String instituteID="";
+        
         String instituteName="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
+        instituteName=context.getExternalContext().getSessionMap().get("SchoolName").toString();
+        
+        int instituteId=Integer.valueOf(instituteID);
+        
+        
+//        InstituteSetup institute = new InstituteSetup();
+//
+//        institute = instituteService.instituteSetup();
 
-        if (institute != null) {
-            instituteId = Integer.valueOf(institute.getInstituteID());
-
-            instituteName = institute.getInstituteFullName();
-        }
+//        int instituteId=1;
+//
+//        String instituteName="";
+//
+//        if (institute != null) {
+//            instituteId = Integer.valueOf(institute.getInstituteID());
+//
+//            instituteName = institute.getInstituteFullName();
+//        }
         int smsCount = 0;
 
         StringBuilder smsBody = new StringBuilder();

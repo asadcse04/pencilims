@@ -30,7 +30,7 @@
                         <h:outputText value="*" styleClass="red"/>
                         <h:outputText value="Institute Id:"/>
                     </p:column><p:column style="width: 130px;">
-                        <p:inputText value="#{instituteSetupController.instituteSetup.instituteID}" styleClass="inputText" required="true" requiredMessage="Please Enter Institute Name."/>
+                        <p:inputText value="#{SchoolID}" styleClass="inputText" readonly="true"/>
                     </p:column>
                    
                     
@@ -38,7 +38,7 @@
                         <h:outputText value="*" styleClass="red"/>
                         <h:outputText value="Institute Name:"/>
                     </p:column><p:column style="width: 130px;">
-                        <p:inputText value="#{instituteSetupController.instituteSetup.instituteFullName}" styleClass="inputText" required="true" requiredMessage="Please Enter Institute Name."/>
+                        <p:inputText value="#{SchoolName}" styleClass="inputText" readonly="true"/>
                     </p:column>
                     
                     

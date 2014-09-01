@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -29,35 +30,39 @@ public class InstituteSetupServiceImpl implements InstituteSetupService,Serializ
         
         PreparedStatement  prst=null;
         
+        String instituteID="";
+        
+        FacesContext context=FacesContext.getCurrentInstance();
+        
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
+        
         try
         {          
-            prst = con.prepareStatement("insert into institute_setup values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
-               
-            prst.setString(1,instituteSetup.getInstituteID());
+            prst = con.prepareStatement("update institute_setup set Address=?,ESTB=?,ContactNo=?,Email=?,WebSite=?,EINNo=?,Code=?,Slogan=?,Note=?,Logo=?,BackGroundImg=? where InstituteID=?");
+
+            prst.setString(1,instituteSetup.getAddress());
             
-            prst.setString(2,instituteSetup.getInstituteFullName());
-                 
-            prst.setString(3,instituteSetup.getAddress());
+            prst.setString(2,instituteSetup.getEstb());
             
-            prst.setString(4,instituteSetup.getEstb());
+            prst.setString(3,instituteSetup.getContactNo());
             
-            prst.setString(5,instituteSetup.getContactNo());
+            prst.setString(4,instituteSetup.getEmail());
             
-            prst.setString(6,instituteSetup.getEmail());
+            prst.setString(5,instituteSetup.getWebSite());
             
-            prst.setString(7,instituteSetup.getWebSite());
+            prst.setString(6,instituteSetup.getEinNo());
             
-            prst.setString(8,instituteSetup.getEinNo());
-            
-            prst.setString(9,instituteSetup.getCode());
+            prst.setString(7,instituteSetup.getCode());
  
-            prst.setString(10,instituteSetup.getSlogan());
+            prst.setString(8,instituteSetup.getSlogan());
              
-            prst.setString(11,instituteSetup.getNote());
+            prst.setString(9,instituteSetup.getNote());
             
-            prst.setString(12,instituteSetup.getImgPath());
+            prst.setString(10,instituteSetup.getImgPath());
             
-            prst.setString(13,instituteSetup.getBackgroundImgPath());
+            prst.setString(11,instituteSetup.getBackgroundImgPath());
+            
+            prst.setString(12, instituteID);
             
             prst.execute();
             

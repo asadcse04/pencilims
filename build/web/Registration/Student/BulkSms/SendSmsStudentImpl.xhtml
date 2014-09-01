@@ -15,7 +15,7 @@
 
             <p:dataTable value="#{sendSmsStudentController.student_data_model}" var="student_List_4_sms" selection="#{sendSmsStudentController.selectedStudentArry}" filteredValue="#{sendSmsStudentController.student_Filter_List}"
 
-                         paginator="true" rows="10" paginatorPosition="bottom" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})" style="width:auto;">
+                         paginator="true" rows="250" paginatorPosition="bottom" scrollable="true" scrollHeight="500" paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" currentPageReportTemplate="(Total {totalRecords})" style="width:auto;">
 
                 <p:column selectionMode="multiple" style="width:2%" /> 
                  

@@ -71,14 +71,24 @@ public class SendSmsTeacherController implements Serializable
 
         teacher_data_model = new TeacherDataModel(this.teacharList);
         
-        institute = instituteService.instituteSetup();
+        String instituteID="";
         
-        if(institute!=null){
-            
-        instituteId= Integer.valueOf(institute.getInstituteID());
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
-        this.smsBal=msgservice.getSmsCurrent_Ac_Balance(instituteId); //schoolid
-        }
+        instituteId=Integer.valueOf(instituteID);
+        
+         this.smsBal=msgservice.getSmsCurrent_Ac_Balance(instituteId); //schoolid
+        
+//        institute = instituteService.instituteSetup();
+//        
+//        if(institute!=null){
+//            
+//        instituteId= Integer.valueOf(institute.getInstituteID()); 
+//        
+//        }
+       
         
        // this.smsBal=msgservice.getSmsCurrent_Ac_Balance(1);//schoolid
     }

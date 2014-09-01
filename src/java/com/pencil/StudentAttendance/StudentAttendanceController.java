@@ -76,15 +76,25 @@ public class StudentAttendanceController {
     {
         this.school_configList=scCnfService.scClassConfiguration_List_ed();
         
-         InstituteSetup institute = new InstituteSetup();
         
-        institute = instituteService.instituteSetup();
+         String instituteID="";
         
-        int instituteId = Integer.valueOf(institute.getInstituteID());
+        FacesContext context=FacesContext.getCurrentInstance();
+         
+        instituteID=context.getExternalContext().getSessionMap().get("SchoolID").toString();
         
-        this.sms_bal = smsService.getSmsCurrent_Ac_Balance(instituteId);//Schoolid:1 
+        int instituteId=Integer.valueOf(instituteID);
         
-       // this.sms_bal = smsService.getSmsCurrent_Ac_Balance(1);//Schoolid:1
+         this.sms_bal = smsService.getSmsCurrent_Ac_Balance(instituteId);//Schoolid:1 
+         
+        
+//        InstituteSetup institute = new InstituteSetup();
+//        
+//        institute = instituteService.instituteSetup();
+//        
+//        int instituteId = Integer.valueOf(institute.getInstituteID());
+              
+//        this.sms_bal = smsService.getSmsCurrent_Ac_Balance(1);//Schoolid:1
         
         System.out.println(this.sms_bal);
     }
